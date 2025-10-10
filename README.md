@@ -8,7 +8,6 @@ A simple Java implementation of LFSR (Linear Feedback Shift Register) for encryp
 - Supports warm-up bits (first X bits are discarded but displayed in console).
 - Shows flip-flop states and output bits for each clock cycle.
 - Classifies the polynomial used: Primitive, Irreducible, or Reducible.
-- Encryption output is kept as raw bytes (may include symbols), not converted to Base64.
 
 ## Usage
 
