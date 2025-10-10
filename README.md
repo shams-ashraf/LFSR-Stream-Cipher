@@ -11,12 +11,6 @@ A simple Java implementation of LFSR (Linear Feedback Shift Register) for encryp
 
 ## Usage
 
-1. Clone or download the repository:
-
-```bash
-git clone https://github.com/shams-ashraf/LFSR-Stream-Cipher.git
-cd LFSR-Stream-Cipher
-
 Follow the prompts:
 
 Enter your message.
