@@ -1,6 +1,6 @@
 import java.util.*;
 
-public class LFSR_Assignment {
+public class LFSR-Stream-Cipher {
 
     static int getParity(int num) {
         int parity = 0;
