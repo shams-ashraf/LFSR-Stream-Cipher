@@ -49,5 +49,7 @@ Clock | Flip-Flops State | Output Bit
 1     | 1010             | 1
 2     | 0101             | 0
 ...
+
 Encrypted Message (as bytes/string, may contain symbols): ¢¢±
+
 Decrypted Message: Hello
