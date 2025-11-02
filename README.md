@@ -1,55 +1,108 @@
-# LFSR-Stream-Cipher
+# LFSR Encryption & Decryption in Java
 
-A simple Java implementation of LFSR (Linear Feedback Shift Register) for encrypting and decrypting messages using a stream cipher approach.
+## Overview
+This Java project implements a **stream cipher** using **Linear Feedback Shift Registers (LFSR)**. It allows users to encrypt and decrypt messages bit by bit, using a user-defined polynomial, initial vector, and warm-up bits. The program also analyzes the polynomial to classify it as **primitive**, **irreducible**, or **reducible**.
+
+---
 
 ## Features
+- Encrypts and decrypts messages using LFSR-based stream cipher.  
+- Supports custom polynomial `p(x)` and initial vector.  
+- Allows discarding **warm-up bits** to enhance security.  
+- Classifies the polynomial type:  
+  - **Primitive Polynomial** → generates maximum-length LFSR sequence  
+  - **Irreducible Polynomial** → fixed shorter sequence  
+  - **Reducible Polynomial** → sequence length depends on initial vector  
+- Displays detailed clock-by-clock encryption/decryption table:  
+  - LFSR state  
+  - Key bit  
+  - Message bit  
+  - XOR result  
+- Outputs message in multiple formats:  
+  - Plain text  
+  - Binary  
 
-- Encrypt and decrypt messages of any length using LFSR.
-- Supports warm-up bits (first X bits are discarded but displayed in console).
-- Shows flip-flop states and output bits for each clock cycle.
-- Classifies the polynomial used: Primitive, Irreducible, or Reducible.
+---
 
 ## Usage
+1. Compile and run the program:
+   ```bash
+   javac LFSR.java
+   java LFSR
+Enter the message to encrypt.
 
-Follow the prompts:
+Specify the LFSR order m (max 9).
 
-Enter your message.
+Enter the polynomial in standard form (e.g., x^4 + x + 1).
 
-Enter m (maximum 9) for the register size.
+Enter the initial vector in binary (e.g., 1101).
 
-Enter the polynomial as binary (e.g., 11101).
-
-Enter the initial vector as binary (e.g., 1101).
-
-Enter the number of warm-up bits (discarded).
+Enter the number of warm-up bits (bits to discard at the beginning).
 
 The program will display:
 
-Warm-up bits.
+Original message in binary
 
-Clock number, flip-flop states, and output bit for each step.
+Polynomial classification
 
-Encrypted message (as raw bytes/string, may include symbols).
+Detailed encryption steps (LFSR state, key bits, XOR results)
 
-Decrypted message (original message).
+Encrypted message (text and binary)
+
+Detailed decryption steps
+
+Decrypted message (text and binary)
 
 Example
-Enter message (e.g., your name): Hello
+
+Enter message (e.g., your name): HELLO
+
 Enter m (max=9): 4
-Enter polynomial p(x) as binary (e.g., 11101): 11101
-Enter initial vector as binary (e.g., 1101): 1101
-Enter warm-up bits count (discarded): 3
 
-Polynomial Type → Reducible Polynomial (Length depends on initial vector)
+Enter polynomial p(x) (e.g., x^4+x+1): x^4+x+1
 
-Warm-up bits (discarded): 110
+Enter initial vector as binary (e.g., 1101): 1011
 
-Clock | Flip-Flops State | Output Bit
--------------------------------------
-1     | 1010             | 1
-2     | 0101             | 0
+Enter warm-up bits count (discarded): 4
+
+Original Message (binary): 01001000 01000101 01001100 01001100 01001111 
+
+Polynomial Type → Primitive Polynomial (Maximum-length LFSR)
+
+Warm-up bits (discarded): 1101
+
+Clock | State |Key Bit| Message Bit | XOR Result
+----------------------------------------------------------
+1     | 1011  | 1     | 0           | 1
+2     | 0111  | 1     | 1           | 0
+3     | 1110  | 0     | 0           | 0
 ...
+(encryption continues for all bits)
 
-Encrypted Message (as bytes/string, may contain symbols): ¢¢±
+Encrypted Message (text): ÐÕËËÓ
 
-Decrypted Message: Hello
+Encrypted Message (binary): 11010000 11010101 11001011 11001011 11010011
+
+Warm-up bits (discarded): 1101
+
+Clock | State |Key Bit| Message Bit | XOR Result
+----------------------------------------------------------
+1     | 1011  | 1     | 1           | 0
+2     | 0111  | 1     | 1           | 0
+3     | 1110  | 0     | 0           | 0
+...
+(decryption continues for all bits)
+
+Decrypted Message (text): HELLO
+
+Decrypted Message (binary): 01001000 01000101 01001100 01001100 01001111
+
+Notes
+
+LFSR order m should not exceed 9 due to practical implementation limits.
+
+Warm-up bits are used to avoid correlation between initial LFSR state and encrypted output.
+
+Polynomial classification helps understand whether the LFSR will produce a maximum-length sequence or not.
+
+The program uses bitwise XOR for encryption/decryption, making it symmetric.
